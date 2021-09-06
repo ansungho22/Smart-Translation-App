@@ -3,6 +3,11 @@ from .models import Message
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import os
+from google.cloud import translate_v2 as translate
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"/Code/chatroom/chatty/smarth-322600-e26f149eb53f.json"
+translate_client = translate.Client()
 
 # Create your views here.
 def index(request):
@@ -29,6 +34,6 @@ def test(request):
         text = request.body.decode("utf-8")
         textjson = json.loads(text)
         mess = textjson["num"]
-
-        print(mess)
+        result = translate_client.translate(textjson, "EN")
+        print(result)
         return JsonResponse(mess, status=200, safe=False)
