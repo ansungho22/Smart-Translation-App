@@ -5,10 +5,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
 from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer
 from rest_framework.decorators import api_view, renderer_classes
-from rest_framework import response, schemas
 
 
 @api_view(["POST"])
