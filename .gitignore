@@ -1,4 +1,11 @@
 *.pyc
 env/
-*.json
+
 *.sqlite3
+.expo/
+.expo-shared/
+.vscode/
+.yarn/
+assets/
+config/
+node_modules/
