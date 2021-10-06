@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Title,  ImageBackground, Alert } from 'react-native-paper';
+import { Title, Alert } from 'react-native-paper';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
-import { AuthContext } from '../navigation/AuthProvider';
-import RNPickerSelect from "react-native-picker-select";
+import {Picker} from '@react-native-picker/picker';
 
 export default function SignupScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -17,7 +16,6 @@ export default function SignupScreen({ navigation }) {
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
 
   const [language, setLanguage] = useState('');
-  const [languageError, setLanguageError] = useState("");
   
   const [nickname, setNickname] = useState('');
   const [nicknameError, setNickNameError] = useState("");
@@ -81,12 +79,7 @@ export default function SignupScreen({ navigation }) {
     } else {
       setPasswordConfirmError("");
     }
-    if (language == "") {
-      setLanguageError("언어를 입력해주세요");
-      return false;
-    } else {
-      setLanguageError("");
-    }
+    
     doSignUpApi();
   };
   return (
@@ -95,7 +88,6 @@ export default function SignupScreen({ navigation }) {
       <FormInput
         labelName='Nickname'
         value={nickname}
-        secureTextEntry={true}
         error={nicknameError}
         onChangeText={userNickname => setNickname(userNickname)}
       />
@@ -120,7 +112,17 @@ export default function SignupScreen({ navigation }) {
         error={passwordConfirmError}
         onChangeText={userPassword => setPasswordConfirm(userPassword)}
       />
-      
+      <Picker style={styles.Picker}
+        value={language}
+        selectedValue={language}
+        onValueChange={(val, idx) => setLanguage(val)}
+        >
+          <Picker.Item label="Korea" value={'KO'} />
+          <Picker.Item label="USA" value={'US'} />
+          <Picker.Item label="Japen" value={'JP'} />
+          <Picker.Item label="China" value={'CH'} />
+          <Picker.Item label="France" value={'FR'} />
+      </Picker>
       <FormButton
         title='Signup'
         modeValue='contained'
@@ -156,5 +158,14 @@ const styles = StyleSheet.create({
   },
   navButton: {
     marginTop: 10
-  }
+  },
+  Picker:{
+    height: 10,
+    width: 280,
+  },
+  PickerContainer: {
+    marginTop: 10,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
 });
