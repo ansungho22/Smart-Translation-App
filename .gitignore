@@ -1,6 +1,6 @@
 *.pyc
 env/
-
+my_settings.py
 *.sqlite3
 .expo/
 .expo-shared/

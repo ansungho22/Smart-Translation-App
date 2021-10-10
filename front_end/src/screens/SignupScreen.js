@@ -4,7 +4,6 @@ import { Title, Alert } from 'react-native-paper';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import {Picker} from '@react-native-picker/picker';
-
 export default function SignupScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState("");
@@ -37,10 +36,10 @@ export default function SignupScreen({ navigation }) {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        Alert.alert("회원가입을 축하합니다");
+        console.log(data);
       })
       .then(() => {
-        navigation.navigate("SignInPage");
+        navigation.navigate('Login');
       })
       .catch((error) => console.log("Error"));
   };

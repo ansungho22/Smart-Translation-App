@@ -14,6 +14,7 @@ from rest_framework import response, schemas
 @permission_classes([AllowAny]) # 인증 필요없다
 def signup(request):
     serializer = UserCreateSerializer(data=request.data) 
+    print(request.data)
     if request.method == 'POST':
         if serializer.is_valid(raise_exception=True):
             serializer.save() # DB 저장
@@ -33,6 +34,7 @@ def login(request):
             'success': True,
             'token': serializer.data['token'] # 시리얼라이저에서 받은 토큰 전달
         }
+        print(response)
         return Response(response, status=status.HTTP_200_OK)
 
 @api_view(['POST']) 

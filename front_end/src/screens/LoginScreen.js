@@ -4,6 +4,7 @@ import { Title } from 'react-native-paper';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
+import { ChatApp } from '../navigation/HomeStack';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -26,26 +27,11 @@ export default function LoginScreen({ navigation }) {
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
-        Alert.alert("로그인되었습니다.");
+      })
+      .then(() => {
+        navigation.navigate('Home');
       })
       .catch((error) => console.log("Error"));
-  };
-
-  const doLogin = () => {
-    if (email == "") {
-      setEmailError("이메일을 입력해주세요");
-      return false;
-    } else {
-      setEmailError("");
-    }
-
-    if (password == "") {
-      setPasswordError("비밀번호를 입력해주세요");
-      return false;
-    } else {
-      setPasswordError("");
-    }
-    callLoginApi()
   };
 
   return (
@@ -67,7 +53,7 @@ export default function LoginScreen({ navigation }) {
         title='Login'
         modeValue='contained'
         labelStyle={styles.loginButtonLabel}
-        onPress={doLogin}
+        onPress={callLoginApi}
       />
       <FormButton
         title='New user? Join here'
